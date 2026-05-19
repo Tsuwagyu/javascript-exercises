@@ -1,7 +1,5 @@
 const permutations = function(arr) {
 
-    console.log("permutations called with:", arr);
-
     const results = [];
 
     // base cases
@@ -10,13 +8,16 @@ const permutations = function(arr) {
     // recursive case
 
 
-    const remainingArr = arr.slice(1);
-    const first = arr[0];
-    const subPermutations = permutations(remainingArr);
+    for (let i = 0; i < arr.length; i++) {
+        let first = arr[i];
+        let remaining = [...arr.slice(0, i), ...arr.slice(i + 1)];
+        let subPermutations = permutations(remaining);
+        for (const sub of subPermutations) {
+            results.push([arr[i], ...sub]);
+        }
 
-    for (const sub of subPermutations) {
-        results.push([first, ...sub]);
     }
+
     return results;
 
 
@@ -28,8 +29,6 @@ const permutations = function(arr) {
 
 
 };
-
-console.log(permutations([1, 2, 3]));
 
   
 // Do not edit below this line
